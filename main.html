@@ -1,0 +1,50 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Webhook Test</title>
+</head>
+<body>
+
+	<h1>Webhook Test</h1>
+
+	<div>
+		<label for="message">Message:</label>
+		<input type="text" id="message" name="message">
+		<button id="send">Send</button>
+	</div>
+
+	<script>
+		const sendButton = document.getElementById("send");
+
+		sendButton.onclick = function(event) {
+			event.preventDefault();
+			const message = document.getElementById("message").value;
+			const webhookUrl = 'https://discord.com/api/webhooks/1159170951217422459/BDbsM_GEvj7ZOEsCeCcrSjQL9LsE11QUGIXC0lXOk9qOsEr2sGAu224uxz3kWe7lAtZh';
+
+			const payload = {
+			    content: message,
+			};
+
+			fetch(webhookUrl, {
+			    method: 'POST',
+			    headers: {
+			        'Content-Type': 'application/json',
+			    },
+			    body: JSON.stringify(payload),
+			})
+			.then((response) => {
+			    if (!response.ok) {
+			        throw new Error(`HTTP error! status: ${response.status}`);
+			    }
+			    console.log("Message sent successfully!");
+			})
+			.catch((error) => {
+			    console.error(`Error sending message: ${error}`);
+			});
+		};
+	</script>
+
+</body>
+</html>
+```
